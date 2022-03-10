@@ -28,14 +28,15 @@ class ListController < ApplicationController
 
   def destroy
     @list.destroy
-    redilect_to :root
+    redirect_to :root
   end
+
   private
   def list_params
     params.require(:list).permit(:title).merge(user: current_user)
   end
 
   def set_list
-    @list = List.find_by(id: params[:id])
+    @list = List.find(params[:id])
   end
 end
